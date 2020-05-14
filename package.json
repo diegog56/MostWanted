@@ -25,6 +25,7 @@
     "@ionic/angular": "^5.0.0",
     "cordova-android": "8.1.0",
     "phaser": "^3.23.0",
+    "reconnecting-websocket": "^4.4.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

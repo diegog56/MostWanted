@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Phaser from 'phaser';
 import { Platform } from '@ionic/angular';
-import { webSocket } from 'rxjs/webSocket';
 import { Router } from '@angular/router';
+import ReconnectingWebSocket from 'reconnecting-websocket';
 
 class MainScene extends Phaser.Scene {
   delta: number;
@@ -14,7 +14,7 @@ class MainScene extends Phaser.Scene {
   height: number;
   width: number;
   url = 'ws://practica2arqui2.herokuapp.com/';
-  socket = webSocket(this.url);
+  socket = new ReconnectingWebSocket(this.url);
   action = 0;
   player: Phaser.Physics.Arcade.Image;
   enemies: Array<Phaser.Physics.Arcade.Image> = [];
@@ -37,14 +37,9 @@ class MainScene extends Phaser.Scene {
   }
 
   getDataSocket() {
-    this.socket.subscribe
-      ({
-        next: (data: any) => {
-          this.action = data;
-        },
-        error: console.log,
-        complete: () => { }
-      });
+    this.socket.addEventListener('message', (message) => {
+      this.action = +message.data;
+    });
   }
 
   create() {
