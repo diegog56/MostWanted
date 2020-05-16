@@ -4,20 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { StatsPageRoutingModule } from './stats-routing.module';
+import { ChartPage } from './chart.page';
 
-import { StatsPage } from './stats.page';
-
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    StatsPageRoutingModule,
-    NgbModule
+    ChartsModule
   ],
-  declarations: [StatsPage]
+  declarations: [ChartPage]
 })
-export class StatsPageModule {}
+export class ChartPageModule {}
