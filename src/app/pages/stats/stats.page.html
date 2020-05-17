@@ -1,9 +1,118 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Stats</ion-title>
+    <ion-title>Estadisticas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Juego</ion-label>
+      <ion-select value="0" okText="OK" cancelText="Cancelar" value="0" [(ngModel)]="juego" (ionChange)="filterData()">
+        <ion-select-option value="0">Todos</ion-select-option>
+        <ion-select-option *ngFor="let game of gamesselect; let i = index" value="{{game._id}}">Juego {{gamesselect.length-i}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h1>Dia
+          <ion-button expand="block" color="dark" (click)="navigateTo(null)">Todos</ion-button>
+        </h1>
+      </ion-label>&nbsp;
+      <ngb-datepicker style="background-color: white;" #dp [(ngModel)]="model" (dateSelect)="navigateTo($event)"></ngb-datepicker>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Estadísticas de Juego
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-button expand="block" color="dark" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+          aria-controls="collapseExample">
+          General
+        </ion-button>
+      </ion-label>
+    </ion-item>
+    <ion-item id="collapseExample" [ngbCollapse]="isCollapsed">
+      <ion-card>
+        <ion-card-header>
+          <ion-button expand="block" color="dark" (click)=graph(games)>
+            Ver Grafica
+          </ion-button>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row class="ion-justify-content-center">
+            <ion-col class="header-col" size="4" tappable (click)="sortBy('date')">
+              <!-- tappable -->
+              <p>Juego</p>
+            </ion-col>
+            <ion-col class="header-col" size="4" tappable (click)="sortBy('speed')">
+              <!-- tappable -->
+              <p>Fecha movimiento</p>
+            </ion-col>
+            <ion-col class="header-col" size="4" tappable (click)="sortBy('speed')">
+              <!-- tappable -->
+              <p>Descripcion</p>
+            </ion-col>
+          </ion-row>
+          <div *ngFor="let game of games; let i = index">
+            <ion-row *ngFor="let mov of game.movs" class="ion-justify-content-center">
+              <ion-col class="header-col" size="4">
+                <p>{{i+1}}</p>
+              </ion-col>
+              <ion-col class="header-col" size="4">
+                <p>{{mov.date}}</p>
+              </ion-col>
+              <ion-col class="header-col" size="4">
+                <p>{{mov.dscrp}}</p>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+    <div *ngFor="let game of games; let i = index">
+      <!-- ngFor de juegos -->
+      <ion-item>
+        <ion-label>
+          <ion-button expand="block" color="dark" (click)="game.isCollapsed = !game.isCollapsed"
+            [attr.aria-expanded]="!game.isCollapsed" aria-controls="{{game._id}}">
+            Juego {{games.length-i}} {{game.score}}pts {{game.totalTime}}s
+          </ion-button>
+        </ion-label>
+      </ion-item>
+      <ion-item id="{{game._id}}" [ngbCollapse]="game.isCollapsed">
+        <ion-card>
+          <ion-card-header>
+            <ion-button expand="block" color="dark" (click)=graphgame([game],games.length-i)>
+              Ver Grafica
+            </ion-button>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-row class="ion-justify-content-center">
+              <ion-col class="header-col" size="6" tappable (click)="sortBy('speed')">
+                <!-- tappable -->
+                <p>Fecha movimiento</p>
+              </ion-col>
+              <ion-col class="header-col" size="6" tappable (click)="sortBy('speed')">
+                <!-- tappable -->
+                <p>Descripcion</p>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let mov of game.movs" class="ion-justify-content-center">
+              <ion-col class="header-col" size="6">
+                <p>{{mov.date}}</p>
+              </ion-col>
+              <ion-col class="header-col" size="6">
+                <p>{{mov.dscrp}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </div>
+
+  </ion-list>
 
 </ion-content>

@@ -14,4 +14,8 @@ export class HomePage {
     location.replace('/game');
   }
 
+  goToStats(){
+    this.router.navigateByUrl('/stats');
+  }
+
 }

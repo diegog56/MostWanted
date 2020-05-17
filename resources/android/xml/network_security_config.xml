@@ -2,5 +2,9 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">68.183.30.44</domain>
+        <domain includeSubdomains="true">68.183.30.44:4000</domain>
+        <domain includeSubdomains="true">http://68.183.30.44:4000/</domain>
+        <domain includeSubdomains="true">ws://68.183.30.44:4000/</domain>
     </domain-config>
 </network-security-config>

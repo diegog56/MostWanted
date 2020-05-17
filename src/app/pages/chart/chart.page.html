@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Graficas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()" color="danger"><ion-icon name="close-circle"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row color="primary" class="ion-justify-content-center">
+      <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+        <div class="ion-text-center">
+          <h3>Puntos y Tiempo</h3>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div>
+    <div style="display: block">
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+  </div>
+  <br>
+  <div>
+    <div style="display: block">
+      <canvas baseChart
+              [datasets]="barChartDataDate"
+              [labels]="barChartLabelsDate"
+              [options]="barChartOptionsDate"
+              [legend]="barChartLegendDate"
+              [chartType]="barChartTypeDate">
+      </canvas>
+    </div>
+  </div>
+  <br>
+  <ion-grid>
+    <ion-row color="primary" class="ion-justify-content-center">
+      <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+        <div class="ion-text-center">
+          <h3>Movimientos</h3>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div style="display: block">
+    <canvas baseChart
+            [data]="pieChartData"
+            [labels]="pieChartLabels"
+            [chartType]="pieChartType"></canvas>
+  </div>
+  <br>
+  <div>
+    <div style="display: block">
+      <canvas baseChart
+              [datasets]="barChartDataMovs"
+              [labels]="barChartLabelsMovs"
+              [options]="barChartOptionsMovs"
+              [legend]="barChartLegendMovs"
+              [chartType]="barChartTypeMovs">
+      </canvas>
+    </div>
+  </div>
+
+</ion-content>
