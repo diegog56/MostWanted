@@ -10,7 +10,7 @@
       <ion-label>Juego</ion-label>
       <ion-select value="0" okText="OK" cancelText="Cancelar" value="0" [(ngModel)]="juego" (ionChange)="filterData()">
         <ion-select-option value="0">Todos</ion-select-option>
-        <ion-select-option *ngFor="let game of games; let i = index" value="{{game._id}}">Juego {{games.length-i}}</ion-select-option>
+        <ion-select-option *ngFor="let game of gamesselect; let i = index" value="{{game._id}}">Juego {{gamesselect.length-i}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
