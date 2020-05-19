@@ -31,10 +31,12 @@ export class ChartPage implements OnInit {
       else this.barChartLabels.push('Juego ' + this.index);
       this.barChartData[0].data.push(mov.totalTime);
       this.barChartData[1].data.push(mov.score);
+      this.barChartData[2].data.push(mov.evaded);
 
       this.barChartLabelsDate.push(mov.date);
       this.barChartDataDate[0].data.push(mov.totalTime);
       this.barChartDataDate[1].data.push(mov.score);
+      this.barChartDataDate[2].data.push(mov.evaded);
 
       this.barChartLabelsMovs.push('Juego ' + (this.movs.length - i));
       for (let movement of mov.movs) {
@@ -78,7 +80,8 @@ export class ChartPage implements OnInit {
   public barChartLegend = true;
   public barChartData = [
     { data: [], label: 'Tiempo' },
-    { data: [], label: 'Puntos' }
+    { data: [], label: 'Puntos' },
+    { data: [], label: 'Evadidos' }
   ];
 
 
@@ -92,7 +95,8 @@ export class ChartPage implements OnInit {
   public barChartLegendDate = true;
   public barChartDataDate = [
     { data: [], label: 'Tiempo' },
-    { data: [], label: 'Puntos' }
+    { data: [], label: 'Puntos' },
+    { data: [], label: 'Evadidos' }
   ];
 
 
