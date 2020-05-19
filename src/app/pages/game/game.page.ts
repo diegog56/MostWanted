@@ -24,11 +24,13 @@ class MainScene extends Phaser.Scene {
   gameover:boolean=false;
   movements:Array<any>=[];
   velocity:number;
+  evaded:number;
 
   init(/*params: any*/): void {
     this.delta = 3000;
     this.lastStarTime = 0;
     this.points = 0;
+    this.evaded = 0;
     this.starsFallen = 0;
     this.lastTime = 0;
     this.height = this.plt.height();
@@ -109,6 +111,7 @@ class MainScene extends Phaser.Scene {
       if (!enemy['isScored']) {
         if (this.player != null && this.player.getTopCenter().y - enemy.getTopCenter().y < 0) {
           this.points+=enemy['points'];
+          this.evaded++;
           enemy['isScored'] = true;
           if(this.delta>2500 && this.points>10){
             this.delta-=300;
@@ -164,7 +167,7 @@ class MainScene extends Phaser.Scene {
       this.player.destroy();
       this.player = null;
       if(!this.gameover){
-        let game = {totalTime:this.gametime,score:this.points,movs:this.movements,date: new Date()};
+        let game = {totalTime:this.gametime,score:this.points,movs:this.movements,date: new Date(), evaded:this.evaded};
         this.http.post('http://68.183.30.44:4000/api/match', game).subscribe(
         res => console.log(res),
         err => console.log(err)
@@ -175,7 +178,7 @@ class MainScene extends Phaser.Scene {
       //POST gameover
     }
     this.gametime = Math.floor(time / 1000);
-    this.info.text = "Puntos: " + this.points + " Tiempo: " + this.gametime + " s";
+    this.info.text = "Puntos: " + this.points + " Tiempo: " + this.gametime + "s Evitados:"+this.evaded;
     }else{
       if(this.action==1){
         location.reload();
@@ -192,7 +195,7 @@ class MainScene extends Phaser.Scene {
         enemycar.destroy();
       }, [enemycar], this);
       if(!this.gameover){
-      let game = {totalTime:this.gametime,score:this.points,movs:this.movements};
+      let game = {totalTime:this.gametime,score:this.points,movs:this.movements, evaded:this.evaded};
         this.http.post('http://68.183.30.44:4000/api/match', game).subscribe(
         res => console.log(res),
         err => console.log(err)
